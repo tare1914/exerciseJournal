@@ -1,7 +1,7 @@
 create table okt (
 	id			integer not null,
-    dato		integer,
-    tid			integer,
+    dato		date,
+    tid			time,
     varighet	integer,
     form		integer,
     notat		varchar(150),
