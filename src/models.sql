@@ -2,7 +2,7 @@ create table okt (
 	id			integer not null,
     dato		integer,
     tid			integer,
-    prestasjon	integer,
+    varighet	integer,
     form		integer,
     notat		varchar(150),
     constraint okt_pk primary key (id)
