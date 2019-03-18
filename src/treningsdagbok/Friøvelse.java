@@ -5,11 +5,11 @@ import java.util.Scanner;
 import java.util.Date;
 import java.time.*;
 
-public class friØvelse extends Øvelse {
+public class Friøvelse extends Øvelse {
 	private String beskrivelse;
 	
-	friØvelse(String øNavn, String beskrivelse){
-		super(øNavn);
+	Friøvelse(String øNavn, String beskrivelse, Connection conn, Scanner sc){
+		super(øNavn, conn, sc);
 		this.beskrivelse=beskrivelse;
 	}
 	

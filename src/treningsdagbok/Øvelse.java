@@ -10,17 +10,17 @@ public class Øvelse {
 	Scanner scanner;
 	Connection myconn;
 	
-	public Øvelse(String øNavn){
+	public Øvelse(String øNavn, Connection conn, Scanner sc){
 		this.navn=øNavn;
-		this.myconn=myconn;
-		this.scanner=scanner;
+		this.myconn=conn;
+		this.scanner=sc;
 	}
 	
 	public String getNavn() {
 		return this.navn;
 	}
 	
-	public void SetNavn(String navn) {
+	public void setNavn(String navn) {
 		this.navn=navn;
 	}
 

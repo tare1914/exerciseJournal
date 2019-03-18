@@ -27,7 +27,7 @@ public class Øvelsesgruppe {
 		}
 		
 		System.out.println("Skriv navn på gruppetype:");
-		gruppetyper = scanner.next();
+		gruppetyper = scan.next();
 		
 		try{
 			String finnes = String.format("select * from Øvelsesgruppe where øvelsesgruppe= '%s';", øvelsesgruppe);
@@ -48,6 +48,7 @@ public class Øvelsesgruppe {
 		}
 		catch(Exception e)	{
 			e.printStackTrace();
+			}
 			
 		}
 		
