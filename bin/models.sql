@@ -1,8 +1,8 @@
 create table okt (
 	id			integer not null,
-    dato		integer,
-    tid			integer,
-    prestasjon	integer,
+    dato		date,
+    tid			time,
+    varighet	integer,
     form		integer,
     notat		varchar(150),
     constraint okt_pk primary key (id)

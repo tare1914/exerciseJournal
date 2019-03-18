@@ -8,17 +8,87 @@ import java.time.*;
 
 
 public class Apparatøvelse extends Øvelse{
-	private Object apparat;
-	public Apparatøvelse(String øNavn, String aNavn, Connection conn, Scanner sc) {
-		super(øNavn, conn, sc);
-		this.apparat=aNavn;
+	private String apparat;
+	private int kilo;
+	private int sett;
+	public Apparatøvelse(Connection conn) {
+		super(conn);
 	}
 	
-	public Object getApparat() {
+	public String getApparat() {
 		return this.apparat;
+	}
+	
+	public int getKilo() {
+		return this.kilo;
+	}
+	
+	public int getSett() {
+		return this.sett;
 	}
 	
 	public void setAparat(String apparat) {
 		this.apparat=apparat;
+	}
+	
+	public void selectApparatØvelse(Scanner sc) {
+		this.selectØvelse(sc);
+		String apparatØvelseGet=String.format("select apparatnavn from apparatovelse where ovelsesnavn='%s'", this.ovelsesnavn);
+		System.out.println("");
+		
+		try {
+			Statement st=conn.createStatement();
+			this.apparat=String.valueOf(st.executeQuery(apparatØvelseGet));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		String kiloØvelseGet=String.format("select kilo from apparatovelse where ovelsesnavn='%s'", this.ovelsesnavn);
+		System.out.println("");
+		
+		try {
+			Statement st=conn.createStatement();
+			this.kilo=Integer.parseInt(String.valueOf(st.executeQuery(kiloØvelseGet)));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		String settØvelseGet=String.format("select sett from apparatovelse where ovelsesnavn='%s'", this.ovelsesnavn);
+		System.out.println("");
+		
+		try {
+			Statement st=conn.createStatement();
+			this.sett=Integer.parseInt(String.valueOf(st.executeQuery(settØvelseGet)));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	public void nyApparatØvelse(Scanner sc){
+		this.nyØvelse(sc);
+		
+		System.out.println("apparatnavn: \n");
+		this.apparat=sc.next();
+		
+		System.out.println("Kilo: \n");
+		this.kilo= Integer.parseInt(sc.next());
+		
+		System.out.println("sett: \n");
+		sett = Integer.parseInt(sc.next());
+		
+		
+		String øvelsesIns = String.format("insert into apparatovelse(ovelsesnavn, kilo, sett, apparatnavn) values('%s' %d, %d, '%s');", this.ovelsesnavn, this.kilo, this.sett, this.apparat);
+		System.out.println("");
+		
+		try {
+			Statement st = conn.createStatement();
+			st.executeUpdate(øvelsesIns);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

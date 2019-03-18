@@ -2,30 +2,57 @@ package treningsdagbok;
 
 import java.sql.*;
 import java.util.Scanner;
-import java.util.Date;
-import java.time.*;
+
 
 public abstract class Øvelse {
-	private String navn;
-	Scanner scanner;
-	Connection myconn;
+	public Connection conn;
+	public String ovelsesnavn;
 	
-	public Øvelse(String øNavn, Connection conn, Scanner sc){
-		this.navn=øNavn;
-		this.myconn=conn;
-		this.scanner=sc;
+	
+	public Øvelse(Connection conn){
+		this.conn=conn;
 	}
 	
-	public String getNavn() {
-		return this.navn;
+	public String getovelsesnavn() {
+		return this.ovelsesnavn;
 	}
 	
-	public void setNavn(String navn) {
-		this.navn=navn;
+	
+	//velger en øvelse fra databasen
+	public void selectØvelse(Scanner sc) {
+		System.out.println("Velg Øvelse\n");
+		this.ovelsesnavn=sc.next();
+		String øvelseGet=String.format("select ovelsesnavn from ovelse where ovelsesnavn='%s'", this.ovelsesnavn);
+		System.out.println("");
+		
+		try {
+			Statement st=conn.createStatement();
+			st.executeQuery(øvelseGet);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
+	
+	
+	//legger til en ny øvelse i databasen
+	public void nyØvelse(Scanner sc) {
+		System.out.println("Legg til ny øvelse\n");
+		this.ovelsesnavn=sc.next();
+		
+		
+		String øvelseIns = String.format("insert into ovelse(ovelsesnavn) values('%s');",this.ovelsesnavn);
+		System.out.println("");
+		
+		try {
+			Statement st = conn.createStatement();
+			st.executeUpdate(øvelseIns);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	//public abstract void addToØvelsesgruppe(Øvelsesgruppe øgruppe);
 
 }
-
 
