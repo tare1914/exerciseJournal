@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Date;
 import java.time.*;
 
-public class Øvelse {
+public abstract class Øvelse {
 	private String navn;
 	Scanner scanner;
 	Connection myconn;
@@ -23,6 +23,8 @@ public class Øvelse {
 	public void setNavn(String navn) {
 		this.navn=navn;
 	}
+	
+	//public abstract void addToØvelsesgruppe(Øvelsesgruppe øgruppe);
 
 }
 
