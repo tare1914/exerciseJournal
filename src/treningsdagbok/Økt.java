@@ -7,7 +7,6 @@ import java.util.Date;
 public class Økt {
 	
 	private Connection conn;
-	private boolean curr;
 	
 	private int oktid;
 	private Date dato;
