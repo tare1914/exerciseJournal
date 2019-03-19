@@ -21,8 +21,8 @@ public class OvelsesGruppe {
 				String first = myRs.getString("gruppetyper");
 				System.out.println(first);
 				System.out.println("\n");
-		}
-		catch(Exception e)	{
+			}
+		}catch(Exception e)	{
 			e.printStackTrace();
 		}
 		

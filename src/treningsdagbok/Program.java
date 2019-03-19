@@ -19,7 +19,7 @@ private static Okt currentOkt;
 			int choiceVar;
 			Scanner scanner = new Scanner(System.in);
 			
-			while(choiceVar != 9){
+			while(choiceVar != 8){
 				if (currentOkt==null){
 					System.out.println("\nIngen økt er valgt  ");
 				} 
@@ -29,16 +29,15 @@ private static Okt currentOkt;
 				}
 				
 				String mainText = "***************************************\n" +
-						"Velg kategori fra listen: \n" +
+						"Velg hva du vil gjøre fra listen: \n" +
 		                "1: Registrer ny treningsøkt \n" +
-		                "2: Legg til øvelse(r) \n" +
-		                "3: Legg til notat til økt \n" +
-		                "4: Lag ny øvelsesgruppe \n" +
-		                "5: Hent ut N siste økter \n" +
-		                "6: Se resultatlogg for en øvelse \n" +
-		                "7: Se Øvelsesgrupper og tilhørende øvelser \n" +
-		                "8: Se rangering av øvelser \n"+
-		                "9: Avslutt";
+		                "2: Legg til øvelse \n" +
+		                "3: Lag ny øvelsesgruppe \n" +
+		                "4: Hent ut n siste økter \n" +
+		                "5: Se resultatlogg for en øvelse \n" +
+		                "6: Se Øvelsesgrupper og tilhørende øvelser \n" +
+		                "7: Se rangering av øvelser \n"+
+		                "8: Avslutt";
 		                ;
 				System.out.println(mainText);
 				choiceVar = scanner.nextInt();
@@ -55,7 +54,7 @@ private static Okt currentOkt;
 					if (currentOkt==null){
 						System.out.println("Ingen økt er valgt \n ");
 					}else {
-						Ovelse øvelse = new Ovelse(conn, currentOkt);
+						Ovelse ovelse = new Ovelse(conn, currentOkt);
 					}
 					
 					break;
@@ -70,7 +69,7 @@ private static Okt currentOkt;
 					break;
 				
 				case 4:
-					new Øvelsesgruppe(conn,scanner);
+					new Ovelsesgruppe(conn,scanner);
 					break;
 					
 				case 5:
