@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.time.format.*;
 
-public class program {
+public class Program {
 	
 private static Okt currentOkt;
 	

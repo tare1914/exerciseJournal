@@ -5,10 +5,10 @@ import java.util.Scanner;
 import java.util.Date;
 import java.time.*;
 
-public class Friøvelse extends Ovelse {
+public class FriOvelse extends Ovelse {
 	private String beskrivelse;
 	
-	Friøvelse(Connection conn){
+	FriOvelse(Connection conn){
 		super(conn);
 	}
 	

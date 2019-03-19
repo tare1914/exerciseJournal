@@ -5,11 +5,11 @@ import java.util.Scanner;
 import java.util.Date;
 import java.time.*;
 
-public class Øvelsesgruppe {
+public class OvelsesGruppe {
 	Connection connect;
 	String øvelsesgruppe;
 	
-	public Øvelsesgruppe(Connection connect, Scanner scan) {
+	public OvelsesGruppe(Connection connect, Scanner scan) {
 		this.connect = connect;
 		String gruppetyper = String.format("select * from Øvelsesgruppe;");
 		
@@ -52,7 +52,7 @@ public class Øvelsesgruppe {
 			
 		}
 		
-		public Øvelsesgruppe(Connection myconn, String øvelsesgruppe) { 
+		public OvelsesGruppe(Connection myconn, String øvelsesgruppe) { 
 			this.øvelsesgruppe = øvelsesgruppe;
 			
 			try	{

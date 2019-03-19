@@ -5,6 +5,6 @@ import java.util.Scanner;
 import java.util.Date;
 import java.time.*;
 
-public class ØvelseIØkt {
+public class OvelseIOkt {
 
 }

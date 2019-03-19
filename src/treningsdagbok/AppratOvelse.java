@@ -7,11 +7,11 @@ import java.util.Date;
 import java.time.*;
 
 
-public class Apparatøvelse extends Ovelse{
+public class AppratOvelse extends Ovelse{
 	private String apparat;
 	private int kilo;
 	private int sett;
-	public Apparatøvelse(Connection conn) {
+	public AppratOvelse(Connection conn) {
 		super(conn);
 	}
 	
