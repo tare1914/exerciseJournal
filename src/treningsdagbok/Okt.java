@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 import java.util.Date;
 
-public class ÿkt {
+public class Okt {
 	
 	private Connection conn;
 	
@@ -14,19 +14,19 @@ public class ÿkt {
 	private int form;
 	private String notat;
 	
-	public ÿkt(Connection conn) {
+	public Okt(Connection conn) {
 		this.conn = conn;
 	}
 	
-	public int getÿktID() {
+	public int getOktID() {
 		return oktid;
 	}
 	
-	public Date getÿktDato() {
+	public Date getOktDato() {
 		return dato;
 	}
 	
-	public void nyÿkt(Scanner sc) {
+	public void nyOkt(Scanner sc) {
 		System.out.println("Legg til ny ¯kt\n");
 		dato = new Date();
 		

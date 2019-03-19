@@ -4,13 +4,15 @@ import java.sql.*;
 import java.util.Scanner;
 
 
-public abstract class Øvelse {
+public abstract class Ovelse {
 	public Connection conn;
 	public String ovelsesnavn;
+	public Okt currentOkt;
 	
 	
-	public Øvelse(Connection conn){
-		this.conn=conn;
+	public Ovelse(Connection conn, Okt currentOkt){
+		conn = this.conn;
+		currentOkt = this.currentOkt;
 	}
 	
 	public String getovelsesnavn() {

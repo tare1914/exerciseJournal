@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Date;
 import java.time.*;
 
-public class Friøvelse extends Øvelse {
+public class Friøvelse extends Ovelse {
 	private String beskrivelse;
 	
 	Friøvelse(Connection conn){

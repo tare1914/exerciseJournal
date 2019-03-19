@@ -7,7 +7,7 @@ import java.util.Date;
 import java.time.*;
 
 
-public class Apparatøvelse extends Øvelse{
+public class Apparatøvelse extends Ovelse{
 	private String apparat;
 	private int kilo;
 	private int sett;

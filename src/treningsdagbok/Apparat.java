@@ -31,7 +31,7 @@ public class Apparat {
 				
 				String apparatInsert = String.format("insert into Apparat values('%s', '%s', '%s');", apparatNavn, ovelsesNavn, beskrivelse);
 				statement.executeUpdate(apparatInsert);
-				
+			
 				System.out.println("");
 			}	
 		} catch (Exception e) {
