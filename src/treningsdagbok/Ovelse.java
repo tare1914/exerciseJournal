@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 
-public abstract class Ovelse {
+public class Ovelse {
 	public Connection conn;
 	public String ovelsesnavn;
 	public Okt currentOkt;

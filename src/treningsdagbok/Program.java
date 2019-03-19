@@ -16,7 +16,7 @@ private static Okt currentOkt;
 		
 		try{
 			Connection conn = DBConn.connect();
-			int choiceVar;
+			int choiceVar = 0;
 			Scanner scanner = new Scanner(System.in);
 			
 			while(choiceVar != 8){
@@ -45,7 +45,7 @@ private static Okt currentOkt;
 				switch (choiceVar){
 				
 				case 1: //start new økt
-					Okt okt= new Okt(conn);
+					Okt okt = new Okt(conn);
 					okt.nyOkt(scanner);
 					currentOkt = okt;
 					break;
@@ -69,7 +69,7 @@ private static Okt currentOkt;
 					break;
 				
 				case 4:
-					new Ovelsesgruppe(conn,scanner);
+					new OvelsesGruppe(conn,scanner);
 					break;
 					
 				case 5:
