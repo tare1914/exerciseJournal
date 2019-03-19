@@ -11,8 +11,8 @@ public class AppratOvelse extends Ovelse{
 	private String apparat;
 	private int kilo;
 	private int sett;
-	public AppratOvelse(Connection conn) {
-		super(conn);
+	public AppratOvelse(Connection conn, Okt currentokt) {
+		super(conn, currentokt);
 	}
 	
 	public String getApparat() {

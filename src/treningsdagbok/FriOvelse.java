@@ -8,8 +8,8 @@ import java.time.*;
 public class FriOvelse extends Ovelse {
 	private String beskrivelse;
 	
-	FriOvelse(Connection conn){
-		super(conn);
+	FriOvelse(Connection conn, Okt currentokt){
+		super(conn, currentokt);
 	}
 	
 	public String getBeskrivelse() {
