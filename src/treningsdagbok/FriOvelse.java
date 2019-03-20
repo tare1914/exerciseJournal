@@ -32,7 +32,7 @@ public class FriOvelse extends Ovelse {
 	}
 	
 	public void nyFriÿvelse(Scanner sc) {
-		this.nyÿvelse(sc);
+		this.nyOvelse(sc);
 		
 		System.out.println("beskrivelse: \n");
 		this.beskrivelse=sc.next();

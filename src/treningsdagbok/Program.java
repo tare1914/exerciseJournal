@@ -1,6 +1,7 @@
 package treningsdagbok;
 
 import java.sql.*;
+import java.util.concurrent.TimeUnit;
 import java.util.Locale;
 import java.util.Scanner;
 import java.time.format.*;
@@ -25,7 +26,7 @@ private static Okt currentOkt;
 				} 
 				else {
 						System.out.println("Nåværende valgt økt er : "+currentOkt.getOktDato() +" ID: "+currentOkt.getOktID());
-						//System.out.println(currentOkt);
+						TimeUnit.SECONDS.sleep(5);
 				}
 				
 				String mainText = "***************************************\n" +
@@ -44,7 +45,7 @@ private static Okt currentOkt;
 				
 				switch (choiceVar){
 				
-				case 1: //start new økt
+				case 1: //start new økt1
 					Okt okt = new Okt(conn);
 					okt.nyOkt(scanner);
 					currentOkt = okt;
@@ -53,8 +54,10 @@ private static Okt currentOkt;
 				case 2: //Legg til Øvelse
 					if (currentOkt==null){
 						System.out.println("Ingen økt er valgt \n ");
-					}else {
+					}
+					else {
 						Ovelse ovelse = new Ovelse(conn, currentOkt);
+						ovelse.nyOvelse(scanner);
 					}
 					
 					break;

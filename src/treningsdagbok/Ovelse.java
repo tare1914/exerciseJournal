@@ -37,7 +37,7 @@ public class Ovelse {
 	
 	
 	//legger til en ny øvelse i databasen
-	public void nyØvelse(Scanner sc) {
+	public void nyOvelse(Scanner sc) {
 		System.out.println("Legg til ny øvelse\n");
 		this.ovelsesnavn=sc.next();
 		

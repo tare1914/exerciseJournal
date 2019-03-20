@@ -3,6 +3,7 @@ package treningsdagbok;
 import java.sql.*;
 import java.util.Scanner;
 import java.util.Date;
+import java.time.*;
 
 public class Okt {
 	
@@ -47,7 +48,7 @@ public class Okt {
 			Statement st = conn.createStatement();
 			st.executeUpdate(øktIns);
 			Statement mySt = conn.createStatement();
-			ResultSet rs = mySt.executeQuery("select max(oktid) from okt;");
+			ResultSet rs = mySt.executeQuery("select max(id) from okt;");
 			if (rs.next()) {
 				oktid = Integer.parseInt(rs.getString(1));
 			}
@@ -55,5 +56,4 @@ public class Okt {
 			e.printStackTrace();
 		}
 	}
-
 }
