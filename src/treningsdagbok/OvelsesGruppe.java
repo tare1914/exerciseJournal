@@ -11,14 +11,14 @@ public class OvelsesGruppe {
 	
 	public OvelsesGruppe(Connection connect, Scanner scan) {
 		this.connect = connect;
-		String gruppetyper = String.format("select * from Øvelsesgruppe;");
+		String gruppetyper = String.format("select * from ovelsesgruppe;");
 		
 		try {
 			Statement listgruppetyper = connect.createStatement();
 			ResultSet myRs = listgruppetyper.executeQuery(gruppetyper);
 			System.out.println("Gruppetyper registrert i databasen: \n");
 			while (myRs.next()){
-				String first = myRs.getString("gruppetyper");
+				String first = myRs.getString("gruppenavn");
 				System.out.println(first);
 				System.out.println("\n");
 			}
@@ -30,7 +30,7 @@ public class OvelsesGruppe {
 		gruppetyper = scan.next();
 		
 		try{
-			String finnes = String.format("select * from Øvelsesgruppe where øvelsesgruppe= '%s';", øvelsesgruppe);
+			String finnes = String.format("select * from ovelsesgruppe where gruppenavn= '%s';", gruppetyper);
 			Statement statement = connect.createStatement();
 			ResultSet myRs = statement.executeQuery(finnes);
 			if (myRs.next())	{
@@ -38,7 +38,7 @@ public class OvelsesGruppe {
 			}
 			else	{
 				
-				String gruppeInsert = String.format("insert into Øvelsesgruppe values('%s');", øvelsesgruppe);
+				String gruppeInsert = String.format("insert into ovelsesgruppe values('%s');", gruppetyper);
 				System.out.println("");
 				statement = connect.createStatement();
 				statement.executeUpdate(gruppeInsert);
@@ -59,7 +59,7 @@ public class OvelsesGruppe {
 			Statement statement = myconn.createStatement();
 			
 			System.out.println("*************************\n");
-			String finnes = String.format("select * from Øvelsesgruppe where øvelsesgruppe = '%s';", øvelsesgruppe);
+			String finnes = String.format("select * from ovelsesgruppe where gruppenavn = '%s';", øvelsesgruppe);
 			
 			ResultSet myRs = statement.executeQuery(finnes);
 			if (myRs.next()){
@@ -67,7 +67,7 @@ public class OvelsesGruppe {
 			}
 			else {
 				System.out.println("Lager ny øvelsesgruppe");
-				String gruppeInsert = String.format("insert into Øvelsesgruppe values('%s');", øvelsesgruppe);
+				String gruppeInsert = String.format("insert into ovelsesgruppe values('%s');", øvelsesgruppe);
 				System.out.println("");
 				statement.executeUpdate(gruppeInsert);
 					

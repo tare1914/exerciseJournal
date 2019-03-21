@@ -16,9 +16,19 @@ public class FriOvelse extends Ovelse {
 		return this.beskrivelse;
 	}
 	
+	public void velgOvelse(Scanner sc, Connection conn) {
+		System.out.println("Legge til ny eller bruke gammel? (n/m): \n");
+		String ny = sc.next();
+		if (ny.equals("n")) {
+			this.nyFriÿvelse(sc, conn);
+		}
+		else {
+			this.selectFriOvelse(sc, conn);
+		}
+	}
 	
-	public void selectFriÿvelse(Scanner sc) {
-		this.selectÿvelse(sc);
+	public void selectFriOvelse(Scanner sc, Connection conn) {
+		this.selectÿvelse(sc, conn);
 		String friÿvelseGet=String.format("select beskrivelse from friovelse where ovelsesnavn='%s'", this.ovelsesnavn);
 		System.out.println("");
 		
@@ -31,10 +41,10 @@ public class FriOvelse extends Ovelse {
 		
 	}
 	
-	public void nyFriÿvelse(Scanner sc) {
-		this.nyOvelse(sc);
+	public void nyFriÿvelse(Scanner sc, Connection conn) {
+		this.nyOvelse(sc, conn);
 		
-		System.out.println("beskrivelse: \n");
+		System.out.println("beskrivelse: (no space)\n");
 		this.beskrivelse=sc.next();
 		
 		

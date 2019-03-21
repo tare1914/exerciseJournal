@@ -21,7 +21,7 @@ public class Ovelse {
 	
 	
 	//velger en øvelse fra databasen
-	public void selectØvelse(Scanner sc) {
+	public void selectØvelse(Scanner sc, Connection conn) {
 		System.out.println("Velg Øvelse\n");
 		this.ovelsesnavn=sc.next();
 		String øvelseGet=String.format("select ovelsesnavn from ovelse where ovelsesnavn='%s'", this.ovelsesnavn);
@@ -37,7 +37,7 @@ public class Ovelse {
 	
 	
 	//legger til en ny øvelse i databasen
-	public void nyOvelse(Scanner sc) {
+	public void nyOvelse(Scanner sc, Connection conn) {
 		System.out.println("Legg til ny øvelse\n");
 		this.ovelsesnavn=sc.next();
 		

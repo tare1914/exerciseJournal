@@ -15,6 +15,17 @@ public class AppratOvelse extends Ovelse{
 		super(conn, currentokt);
 	}
 	
+	public void velgOvelse(Scanner sc, Connection conn) {
+		System.out.println("Legge til ny eller bruke gammel? (n/m): \n");
+		String ny = sc.next();
+		if (ny.equals("n")) {
+			this.nyApparatÿvelse(sc, conn);
+		}
+		else {
+			this.selectApparatÿvelse(sc, conn);
+		}
+	}
+	
 	public String getApparat() {
 		return this.apparat;
 	}
@@ -31,8 +42,8 @@ public class AppratOvelse extends Ovelse{
 		this.apparat=apparat;
 	}
 	
-	public void selectApparatÿvelse(Scanner sc) {
-		this.selectÿvelse(sc);
+	public void selectApparatÿvelse(Scanner sc, Connection conn) {
+		this.selectÿvelse(sc, conn);
 		String apparatÿvelseGet=String.format("select apparatnavn from apparatovelse where ovelsesnavn='%s'", this.ovelsesnavn);
 		System.out.println("");
 		
@@ -68,8 +79,8 @@ public class AppratOvelse extends Ovelse{
 	}
 	
 	
-	public void nyApparatÿvelse(Scanner sc){
-		this.nyÿvelse(sc);
+	public void nyApparatÿvelse(Scanner sc, Connection conn){
+		this.nyOvelse(sc, conn);
 		
 		System.out.println("apparatnavn: \n");
 		this.apparat=sc.next();
@@ -79,6 +90,8 @@ public class AppratOvelse extends Ovelse{
 		
 		System.out.println("sett: \n");
 		sett = Integer.parseInt(sc.next());
+		
+		System.out.println(this.ovelsesnavn);
 		
 		
 		String ¯velsesIns = String.format("insert into apparatovelse(ovelsesnavn, kilo, sett, apparatnavn) values('%s' %d, %d, '%s');", this.ovelsesnavn, this.kilo, this.sett, this.apparat);

@@ -20,21 +20,21 @@ private static Okt currentOkt;
 			int choiceVar = 0;
 			Scanner scanner = new Scanner(System.in);
 			
-			while(choiceVar != 8){
+			while(true){
 				if (currentOkt==null){
-					System.out.println("\nIngen økt er valgt  ");
+					System.out.println("\nIngen okt er valgt  ");
 				} 
 				else {
-						System.out.println("Nåværende valgt økt er : "+currentOkt.getOktDato() +" ID: "+currentOkt.getOktID());
-						TimeUnit.SECONDS.sleep(5);
+						System.out.println("Nåværende valgt okt er : "+currentOkt.getOktDato() +" ID: "+currentOkt.getOktID());
+						TimeUnit.SECONDS.sleep(2);
 				}
 				
 				String mainText = "***************************************\n" +
 						"Velg hva du vil gjøre fra listen: \n" +
-		                "1: Registrer ny treningsøkt \n" +
-		                "2: Legg til øvelse \n" +
-		                "3: Lag ny øvelsesgruppe \n" +
-		                "4: Hent ut n siste økter \n" +
+		                "1: Registrer ny treningsokt \n" +
+		                "2: Legg til friøvelse \n" +
+		                "3: Legg til apparatøvelse\n" +
+		                "4: Hent ut n siste okter \n" +
 		                "5: Se resultatlogg for en øvelse \n" +
 		                "6: Se Øvelsesgrupper og tilhørende øvelser \n" +
 		                "7: Se rangering av øvelser \n"+
@@ -45,7 +45,7 @@ private static Okt currentOkt;
 				
 				switch (choiceVar){
 				
-				case 1: //start new økt1
+				case 1: //start new okt1
 					Okt okt = new Okt(conn);
 					okt.nyOkt(scanner);
 					currentOkt = okt;
@@ -53,22 +53,23 @@ private static Okt currentOkt;
 					
 				case 2: //Legg til Øvelse
 					if (currentOkt==null){
-						System.out.println("Ingen økt er valgt \n ");
+						System.out.println("Ingen okt er valgt \n ");
 					}
 					else {
-						Ovelse ovelse = new Ovelse(conn, currentOkt);
-						ovelse.nyOvelse(scanner);
+						FriOvelse friovelse = new FriOvelse(conn, currentOkt);
+						friovelse.velgOvelse(scanner, conn);
 					}
 					
 					break;
 					
-				case 3: // legg til notat
+				case 3: // legg til appratøvelse
 					if (currentOkt==null){
-						System.out.println("Ingen økt er valgt \n ");
-					}else {
-						
-						//notat.nyttNotat(scanner,currentOkt);
-						}
+						System.out.println("Ingen okt er valgt \n ");
+					}
+					else {
+						AppratOvelse apparatovelse = new AppratOvelse(conn, currentOkt);
+						apparatovelse.velgOvelse(scanner, conn);
+					}
 					break;
 				
 				case 4:
@@ -76,21 +77,25 @@ private static Okt currentOkt;
 					break;
 					
 				case 5:
-					System.out.println("Angi hvor mange økter du vil se: \n ");
+					System.out.println("Angi hvor mange okter du vil se: \n ");
 					int n = scanner.nextInt();
-					getNlastØkts(n,conn);
+					getNlastokts(n,conn);
 					break;
+					
 				case 6:
 					getØvelsesResultat(conn,scanner);
 					break;
+					
 				case 7:
 					getØvelsesgruppe( conn, scanner);
 					break;
+					
 				case 8:
 					getStatistikk(conn);
 					break;
+					
 				case 9:
-					return;
+					System.exit(0);
 					
 				
 				default:
@@ -110,15 +115,15 @@ private static Okt currentOkt;
 
 	}
 	public static void getStatistikk(Connection myconn){
-		String statQuery = "select øvelse.øvelsesnavn,avg(øvelseiøkt.prestasjon) as sort from øvelse "+
-								"join øvelseiøkt on øvelse.øvelsesnavn = øvelseiøkt.øvelsesnavn "+
-									"group by øvelse.øvelsesnavn "+
+		String statQuery = "select ovelse.ovelsesnavn,avg(ovelseiokt.prestasjon) as sort from ovelse "+
+								"join ovelseiokt on ovelse.ovelsesnavn = ovelseiokt.ovelsesnavn "+
+									"group by ovelse.ovelsesnavn "+
 										"order by sort desc;";
 		try{
 			Statement statement = myconn.createStatement();
 			ResultSet rs = statement.executeQuery(statQuery);
 			while(rs.next()){
-				System.out.println("Øvelse: "+ rs.getString("øvelsesnavn") + " Snittprestasjon: "+rs.getString("sort")  );
+				System.out.println("Øvelse: "+ rs.getString("ovelsesnavn") + " Snittprestasjon: "+rs.getString("sort")  );
 			}
 			
 		}catch(Exception e){
@@ -133,14 +138,14 @@ private static Okt currentOkt;
 		// list opp øvelser registrert i db
 		// be brukeren velge hvilken han vil se logg for
 		int maxID ;
-		String størsteid =("select max(øktid) from økt;");
+		String størsteid =("select max(id) from okt;");
 		//select something
-		String alleøvelser= String.format("select * from Øvelse ;");
+		String alleøvelser= String.format("select * from ovelse ;");
 		try{
 			Statement statement = myconn.createStatement();
 			ResultSet myRs = statement.executeQuery(størsteid);
 			if (myRs.next()){
-				maxID = (myRs.getInt("max(øktid)"));
+				maxID = (myRs.getInt("max(id)"));
 			}else{
 				System.out.println("Fins ikke øvelses så langt tilbake. Beklager");
 				return;
@@ -150,7 +155,7 @@ private static Okt currentOkt;
 			 myRs = listøvelser.executeQuery(alleøvelser);
 			System.out.println("Øvelser registrert i databasen:\n");
 			while (myRs.next()){
-				String first = myRs.getString("øvelsesnavn");
+				String first = myRs.getString("ovelsesnavn");
 				System.out.println(first);
 				//System.out.println("\n");
 			}
@@ -159,12 +164,12 @@ private static Okt currentOkt;
 			System.out.println("Hvor langt tilbake vil du se loggen?:\n");
 			int periode = scanner.nextInt();
 			//build query
-			String getøvelseslogg= String.format("select * from øvelse join øvelseiøkt on øvelse.øvelsesnavn = øvelseiøkt.øvelsesnavn where( øvelse.øvelsesnavn='%s' and øktid > '%d');",øvelsesvalg,maxID-periode);
+			String getøvelseslogg= String.format("select * from ovelse join ovelseiokt on ovelse.ovelsesnavn = ovelseiokt.ovelsesnavn where( ovelse.ovelsesnavn='%s' and id > '%d');",øvelsesvalg,maxID-periode);
 			
 			 statement = myconn.createStatement();
 			myRs = listøvelser.executeQuery(getøvelseslogg);
 			while (myRs.next()){
-				String first = "Økt ID: "+ myRs.getString("øktid")+ "   "+ "Prestasjon: "+myRs.getString("prestasjon");
+				String first = "okt ID: "+ myRs.getString("id")+ "   "+ "Prestasjon: "+myRs.getString("prestasjon");
 				System.out.println(first);
 			}
 		}catch(Exception e){
@@ -204,26 +209,26 @@ private static Okt currentOkt;
 		
 	}
 	
-	public static void getNlastØkts(int n, Connection myconn){
+	public static void getNlastokts(int n, Connection myconn){
 
 		int maxID ;
-		String størsteid =("select max(øktid) from økt;");
+		String størsteid =("select max(id) from okt;");
 		try{
 			Statement statement = myconn.createStatement();
 			ResultSet myRs = statement.executeQuery(størsteid);
 			if (myRs.next()){
-				maxID = (myRs.getInt("max(øktid)"));
+				maxID = (myRs.getInt("max(id)"));
 			}else{
-				System.out.println("Ingen tidligere økter i databasen");
+				System.out.println("Ingen tidligere okter i databasen");
 				return;
 
 			}
 		
 		
-			String allegrupper = String.format("select * from økt left join Øktnotat on økt.øktid=øktnotat.øktid  left join notat on notat.notatid=øktnotat.notatid  where økt.øktid> '%d' ;",maxID-n);
+			String allegrupper = String.format("select * from okt left join oktnotat on okt.id=oktnotat.id  left join notat on notat.notatid=oktnotat.notatid  where okt.id> '%d' ;",maxID-n);
 		
-			Statement listøkter = myconn.createStatement();
-			 myRs = listøkter.executeQuery(allegrupper);
+			Statement listokter = myconn.createStatement();
+			 myRs = listokter.executeQuery(allegrupper);
 			
 			while (myRs.next()){
 				String notatt;
@@ -232,7 +237,7 @@ private static Okt currentOkt;
 				}else{
 					notatt=myRs.getString("tekstfelt");
 				}
-				String first = "Økt ID: "+ myRs.getString("øktid")+ "   "+ "Notat: "+ notatt;
+				String first = "okt ID: "+ myRs.getString("id")+ "   "+ "Notat: "+ notatt;
 				System.out.println(first);
 				//System.out.println("\n");
 			}

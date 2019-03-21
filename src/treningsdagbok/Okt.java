@@ -37,7 +37,7 @@ public class Okt {
 		System.out.println("Dagsform: \n");
 		form = Integer.parseInt(sc.next());
 		
-		System.out.println("Notat: \n");
+		System.out.println("Notat: (no space) \n");
 		notat = sc.next();
 		
 		
