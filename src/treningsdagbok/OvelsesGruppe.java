@@ -7,7 +7,7 @@ import java.time.*;
 
 public class OvelsesGruppe {
 	Connection connect;
-	String øvelsesgruppe;
+	static String øvelsesgruppe;
 	
 	public OvelsesGruppe(Connection connect, Scanner scan) {
 		this.connect = connect;
@@ -76,6 +76,21 @@ public class OvelsesGruppe {
 				e.printStackTrace();
 				
 				
+			}
+		}
+		
+		public static void leggOv(Scanner sc, Connection conn) {
+			System.out.println("Hvilken gruppe vil du legge til i?:");
+			øvelsesgruppe = sc.next();
+			System.out.println("Hvilken øvelse vil du legge inn?");
+			String ovelse = sc.next();
+			
+			try {
+			String ovelseInsert = String.format("insert into ovelseigruppe values('%s', '%s');", ovelse, øvelsesgruppe);
+			Statement statement = conn.createStatement();
+			statement.executeUpdate(ovelseInsert);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 

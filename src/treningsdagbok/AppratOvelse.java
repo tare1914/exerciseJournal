@@ -15,7 +15,7 @@ public class AppratOvelse extends Ovelse{
 		super(conn, currentokt);
 	}
 	
-	public void velgOvelse(Scanner sc, Connection conn) {
+	public void velgOvelse(Scanner sc, Connection conn, Okt currentOkt) throws SQLException {
 		System.out.println("Legge til ny eller bruke gammel? (n/m): \n");
 		String ny = sc.next();
 		if (ny.equals("n")) {
@@ -24,6 +24,8 @@ public class AppratOvelse extends Ovelse{
 		else {
 			this.selectApparatÿvelse(sc, conn);
 		}
+		OvelseIOkt iokt = new OvelseIOkt(conn);
+		iokt.addOvelseiokt(conn, sc, currentOkt.getOktID(), this.ovelsesnavn);
 	}
 	
 	public String getApparat() {
